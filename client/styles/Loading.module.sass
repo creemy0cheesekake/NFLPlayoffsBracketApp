@@ -1,80 +1,83 @@
 $color: #3e83c4
+$elSize: 80px
+$dotSizeFactor: 7
+@use 'sass:math'
 
 .loading
   display: inline-block
   position: relative
-  width: 80px
-  height: 80px
+  width: $elSize
+  height: $elSize
 
   div
     animation: animation 2s cubic-bezier(.69,.1,.69,.88) 5s infinite
-    transform-origin: 40px 40px
+    transform-origin: math.div($elSize, 2) math.div($elSize, 2)
 
     &:after
       content: " "
       display: block
       position: absolute
-      width: 7px
-      height: 7px
+      width: math.div($dotSizeFactor,80) * $elSize
+      height: math.div($dotSizeFactor,80) * $elSize
       border-radius: 50%
       background: $color
-      margin: -4px 0 0 -4px
+      margin: -4,80 * $elSize 0 0 -4,80 * $elSize
 
     &:nth-child(1)
       animation-delay: -0.036s
 
       &:after
-        top: 63px
-        left: 63px
+        top: math.div(63,80) * $elSize
+        left: math.div(63,80) * $elSize
 
     &:nth-child(2)
       animation-delay: -0.072s
 
       &:after
-        top: 68px
-        left: 56px
+        top: math.div(68,80) * $elSize
+        left: math.div(56,80) * $elSize
 
     &:nth-child(3)
       animation-delay: -0.108s
 
       &:after
-        top: 71px
-        left: 48px
+        top: math.div(71,80) * $elSize
+        left: math.div(48,80) * $elSize
 
     &:nth-child(4)
       animation-delay: -0.144s
 
       &:after
-        top: 72px
-        left: 40px
+        top: math.div(72,80) * $elSize
+        left: math.div(40,80) * $elSize
 
     &:nth-child(5)
       animation-delay: -0.18s
 
       &:after
-        top: 71px
-        left: 32px
+        top: math.div(71,80) * $elSize
+        left: math.div(32,80) * $elSize
 
     &:nth-child(6)
       animation-delay: -0.216s
 
       &:after
-        top: 68px
-        left: 24px
+        top: math.div(68,80) * $elSize
+        left: math.div(24,80) * $elSize
 
     &:nth-child(7)
       animation-delay: -0.252s
 
       &:after
-        top: 63px
-        left: 17px
+        top: math.div(63,80) * $elSize
+        left: math.div(17,80) * $elSize
 
     &:nth-child(8)
       animation-delay: -0.288s
 
       &:after
-        top: 56px
-        left: 12px
+        top: math.div(56,80) * $elSize
+        left: math.div(12,80) * $elSize
 
 @keyframes animation
   0%
