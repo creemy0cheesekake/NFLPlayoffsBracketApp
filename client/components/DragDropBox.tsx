@@ -100,10 +100,7 @@ const DragDropBox = () => {
 					{...provided.droppableProps}
 				>
 					{teams.map((team, i) => (
-						<Draggable
-							draggableId={team.team + "-draggableId"}
-							index={i}
-						>
+						<Draggable draggableId={i + "-draggableId"} index={i}>
 							{provided => (
 								<div
 									key={team.team}
