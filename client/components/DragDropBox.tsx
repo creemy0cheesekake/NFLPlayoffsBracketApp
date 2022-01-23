@@ -103,7 +103,7 @@ const DragDropBox = () => {
 						<Draggable draggableId={i + "-draggableId"} index={i}>
 							{provided => (
 								<div
-									key={team.team}
+									key={i}
 									{...provided.draggableProps}
 									{...provided.dragHandleProps}
 									ref={provided.innerRef}
