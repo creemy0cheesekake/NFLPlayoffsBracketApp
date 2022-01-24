@@ -1,109 +1,26 @@
 import { useState } from "react";
 import styles from "../styles/DragDropBox.module.sass";
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import { Team } from "../lib/types";
 import { v4 } from "uuid";
+import { Team } from "../lib/types";
 
-const DragDropBox = () => {
-	const [teams, setTeams] = useState<Team[]>([
-		{
-			area: "New England ",
-			team: "Patriots",
-			seed: 1,
-			logo: "patriots-logo",
-		},
-		{
-			area: "New England ",
-			team: "Patriots",
-			seed: 1,
-			logo: "patriots-logo",
-		},
-		{
-			area: "New England ",
-			team: "Patriots",
-			seed: 1,
-			logo: "patriots-logo",
-		},
-		{
-			area: "New England ",
-			team: "Patriots",
-			seed: 1,
-			logo: "patriots-logo",
-		},
-		{
-			area: "New England ",
-			team: "Patriots",
-			seed: 1,
-			logo: "patriots-logo",
-		},
-		{
-			area: "New England ",
-			team: "Patriots",
-			seed: 1,
-			logo: "patriots-logo",
-		},
-		{
-			area: "New England ",
-			team: "Patriots",
-			seed: 1,
-			logo: "patriots-logo",
-		},
-		{
-			area: "New England ",
-			team: "Patriots",
-			seed: 1,
-			logo: "patriots-logo",
-		},
-		{
-			area: "New England ",
-			team: "Patriots",
-			seed: 1,
-			logo: "patriots-logo",
-		},
-		{
-			area: "New England ",
-			team: "Patriots",
-			seed: 1,
-			logo: "patriots-logo",
-		},
-		{
-			area: "New England ",
-			team: "Patriots",
-			seed: 1,
-			logo: "patriots-logo",
-		},
-		{
-			area: "New England ",
-			team: "Patriots",
-			seed: 1,
-			logo: "patriots-logo",
-		},
-		{
-			area: "New England ",
-			team: "Patriots",
-			seed: 1,
-			logo: "patriots-logo",
-		},
-		{
-			area: "New England ",
-			team: "Patriots",
-			seed: 1,
-			logo: "patriots-logo",
-		},
-	]);
+const DragDropBox = ({ teams }) => {
 	return (
-		<Droppable droppableId={"d"}>
+		<Droppable droppableId={"dragDrop"}>
 			{provided => (
 				<div
 					className={styles.container}
 					ref={provided.innerRef}
 					{...provided.droppableProps}
 				>
-					{teams.map((team, i) => (
-						<Draggable draggableId={i + "-draggableId"} index={i}>
+					{teams.map((team: Team, i: number) => (
+						<Draggable
+							draggableId={i + "-draggableId"}
+							index={i}
+							key={i}
+						>
 							{provided => (
 								<div
-									key={i}
 									{...provided.draggableProps}
 									{...provided.dragHandleProps}
 									ref={provided.innerRef}

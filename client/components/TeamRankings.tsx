@@ -4,20 +4,19 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 import { Team } from "../lib/types";
 import { v4 } from "uuid";
 
-const DragDropBox = () => {
-	const [teams, setTeams] = useState<Team[]>([]);
+const DragDropBox = ({ team, rank }) => {
 	return (
-		<Droppable droppableId={"dd"}>
+		<Droppable droppableId={"rankings-" + rank}>
 			{provided => (
 				<div
 					className={styles.container}
 					ref={provided.innerRef}
 					{...provided.droppableProps}
 				>
-					{teams.map((team, i) => (
+					{!!team && (
 						<Draggable
 							draggableId={team.team + "-draggableId"}
-							index={i}
+							index={team.seed}
 						>
 							{provided => (
 								<div
@@ -35,7 +34,7 @@ const DragDropBox = () => {
 								</div>
 							)}
 						</Draggable>
-					))}
+					)}
 					{provided.placeholder}
 				</div>
 			)}
