@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-	DragDropContext,
-	DraggableLocation,
-	DropResult,
-} from "react-beautiful-dnd";
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import Loading from "../components/Loading";
 import styles from "../styles/Home.module.sass";
 import DragDropBox from "./../components/DragDropBox";
@@ -17,90 +13,90 @@ const Home = () => {
 	const [teamsDragDropBox, setTeamsDragDropBox] = useState<Team[]>([
 		{
 			area: "New England ",
-			team: "Patriots",
+			team: "Patriots1",
 			seed: 1,
 			logo: "patriots-logo",
 		},
 		{
 			area: "New England ",
-			team: "Patriots",
-			seed: 1,
+			team: "Patriots2",
+			seed: 2,
 			logo: "patriots-logo",
 		},
 		{
 			area: "New England ",
-			team: "Patriots",
-			seed: 1,
+			team: "Patriots3",
+			seed: 3,
 			logo: "patriots-logo",
 		},
 		{
 			area: "New England ",
-			team: "Patriots",
-			seed: 1,
+			team: "Patriots4",
+			seed: 4,
 			logo: "patriots-logo",
 		},
 		{
 			area: "New England ",
-			team: "Patriots",
-			seed: 1,
+			team: "Patriots5",
+			seed: 5,
 			logo: "patriots-logo",
 		},
 		{
 			area: "New England ",
-			team: "Patriots",
-			seed: 1,
+			team: "Patriots6",
+			seed: 6,
 			logo: "patriots-logo",
 		},
 		{
 			area: "New England ",
-			team: "Patriots",
-			seed: 1,
+			team: "Patriots7",
+			seed: 7,
 			logo: "patriots-logo",
 		},
 		{
 			area: "New England ",
-			team: "Patriots",
-			seed: 1,
+			team: "Patriots8",
+			seed: 8,
 			logo: "patriots-logo",
 		},
 		{
 			area: "New England ",
-			team: "Patriots",
-			seed: 1,
+			team: "Patriots9",
+			seed: 9,
 			logo: "patriots-logo",
 		},
 		{
 			area: "New England ",
-			team: "Patriots",
-			seed: 1,
+			team: "Patriots10",
+			seed: 10,
 			logo: "patriots-logo",
 		},
 		{
 			area: "New England ",
-			team: "Patriots",
-			seed: 1,
+			team: "Patriots11",
+			seed: 11,
 			logo: "patriots-logo",
 		},
 		{
 			area: "New England ",
-			team: "Patriots",
-			seed: 1,
+			team: "Patriots12",
+			seed: 12,
 			logo: "patriots-logo",
 		},
 		{
 			area: "New England ",
-			team: "Patriots",
-			seed: 1,
+			team: "Patriots13",
+			seed: 13,
 			logo: "patriots-logo",
 		},
 		{
 			area: "New England ",
-			team: "Patriots",
-			seed: 1,
+			team: "Patriots14",
+			seed: 14,
 			logo: "patriots-logo",
 		},
 	]);
-	const [teamRankings, setTeamRankings] = useState<Team | null>();
+	const [teamRankings, setTeamRankings] = useState<Team[]>(Array(14));
 	const [componentsMounted, setComponentsMounted] = useState(false);
 	useEffect(() => setComponentsMounted(true), []);
 	const handleDragEnd = ({ destination, source }: DropResult) => {
@@ -109,8 +105,17 @@ const Home = () => {
 		// checks whether element is being dragged from the box to the rankings or from the rankings to the box through the draggableId
 		if (source.droppableId === "dragDrop") {
 			// droppableId is formatted as either "dragDrop" or "rankings-<SEED>"
-			const seed = destination.droppableId.slice(-1);
-			console.log(seed);
+			let newRankings = [...teamRankings];
+			// this will take the place of the element that existed in that spot if there was one
+			const OldElement: Team | undefined = newRankings.splice(
+				1,
+				1,
+				teamsDragDropBox.splice(source.index, 1)[0]
+			)[0];
+			if (OldElement)
+				setTeamsDragDropBox([...teamsDragDropBox].concat([OldElement]));
+			setTeamRankings(newRankings);
+			console.log(teamRankings);
 		}
 	};
 	return (
@@ -119,7 +124,7 @@ const Home = () => {
 				{componentsMounted ? (
 					<DragDropContext onDragEnd={handleDragEnd}>
 						<DragDropBox teams={teamsDragDropBox} />
-						<TeamRankings team={teamRankings} rank={1} />
+						<TeamRankings teams={teamRankings} rank={1} />
 					</DragDropContext>
 				) : (
 					<Loading show />

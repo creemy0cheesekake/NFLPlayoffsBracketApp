@@ -1,10 +1,8 @@
-import { useState } from "react";
 import styles from "../styles/DragDropBox.module.sass";
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import { Team } from "../lib/types";
-import { v4 } from "uuid";
 
-const DragDropBox = ({ team, rank }) => {
+const DragDropBox = ({ teams, rank }) => {
+	const team = teams[rank];
 	return (
 		<Droppable droppableId={"rankings-" + rank}>
 			{provided => (
