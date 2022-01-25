@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import Loading from "../components/Loading";
 import styles from "../styles/Home.module.sass";
 import DragDropBox from "./../components/DragDropBox";
-import TeamRankings from "./../components/TeamRankings";
+import TeamRankingCell from "../components/TeamRankingCell";
+import TeamRankingsContainer from "../components/TeamRankingsContainer";
 
 import { Team } from "../lib/types";
 
@@ -99,33 +99,15 @@ const Home = () => {
 	const [teamRankings, setTeamRankings] = useState<Team[]>(Array(14));
 	const [componentsMounted, setComponentsMounted] = useState(false);
 	useEffect(() => setComponentsMounted(true), []);
-	const handleDragEnd = ({ destination, source }: DropResult) => {
-		if (!destination) return;
-		if (destination.droppableId === source.droppableId) return;
-		// checks whether element is being dragged from the box to the rankings or from the rankings to the box through the draggableId
-		if (source.droppableId === "dragDrop") {
-			// droppableId is formatted as either "dragDrop" or "rankings-<SEED>"
-			let newRankings = [...teamRankings];
-			// this will take the place of the element that existed in that spot if there was one
-			const OldElement: Team | undefined = newRankings.splice(
-				1,
-				1,
-				teamsDragDropBox.splice(source.index, 1)[0]
-			)[0];
-			if (OldElement)
-				setTeamsDragDropBox([...teamsDragDropBox].concat([OldElement]));
-			setTeamRankings(newRankings);
-			console.log(teamRankings);
-		}
-	};
 	return (
 		<>
 			<main className={styles.main}>
 				{componentsMounted ? (
-					<DragDropContext onDragEnd={handleDragEnd}>
+					<>
 						<DragDropBox teams={teamsDragDropBox} />
-						<TeamRankings teams={teamRankings} rank={1} />
-					</DragDropContext>
+						{/* <TeamRankings teams={teamRankings} rank={1} /> */}
+						<TeamRankingsContainer />
+					</>
 				) : (
 					<Loading show />
 				)}
