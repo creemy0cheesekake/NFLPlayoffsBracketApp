@@ -1,16 +1,13 @@
 import styles from "../styles/TeamRankingCell.module.sass";
 
-const TeamRankingCell = ({ teams, rank }) => {
-	const team = teams[rank];
+const TeamRankingCell = ({ team }) => {
 	return (
 		<>
-			{!!team ? (
-				<>
-					<span className={styles.areaName}>{team.area}</span>
-					<span className={styles.teamName}>{team.team}</span>
-				</>
-			) : (
-				<div>{teams.toString()}</div>
+			{!!team && (
+				<span className="team-wrapper">
+					<span>{team.area}</span>
+					<span>{team.team}</span>
+				</span>
 			)}
 		</>
 	);

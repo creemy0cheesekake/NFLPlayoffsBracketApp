@@ -1,14 +1,19 @@
+import React from "react";
+import { Team } from "../lib/types";
 import styles from "../styles/TeamRankingsContainer.module.sass";
+import TeamRankingCell from "./TeamRankingCell";
 
-const TeamRankingsContainer = () => {
+const TeamRankingsContainer = ({ teams, dropRef }) => {
 	return (
-		<div className={styles.container}>
-			<div>1</div>
-			<div>2</div>
-			<div>3</div>
-			<div>4</div>
-			<div>5</div>
-			<div>6</div>
+		<div ref={dropRef} className={styles.container}>
+			{teams.map((team: Team, i: number) => (
+				<React.Fragment key={i}>
+					<div className={styles.rankingsCells}>
+						<TeamRankingCell team={team} />
+					</div>
+					<div className={styles.rankingsCells}>{i + 1}</div>
+				</React.Fragment>
+			))}
 		</div>
 	);
 };

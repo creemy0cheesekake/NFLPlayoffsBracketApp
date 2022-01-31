@@ -1,3 +1,4 @@
+@use './variables' as var
 @import 'https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300&display=swap'
 $font-stack: 'Libre Franklin', sans-serif
 
@@ -6,5 +7,21 @@ $font-stack: 'Libre Franklin', sans-serif
     padding: 0
     box-sizing: border-box
     font-family: $font-stack
+
+.team-wrapper
+    display: flex
+    flex-direction: column
+    background-color: var.$primary
+    filter: brightness(0.9)
+    padding: .5rem
+    border-radius: 1rem
+    user-select: none
+    box-shadow: 1px 1px 3px 1px #00000043
+    span:first-child
+        color: #888
+        font-size: .75rem
+    span
+        color: var.$secondary
+        font-size: 1.75rem
 
     
