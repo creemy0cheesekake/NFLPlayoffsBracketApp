@@ -1,9 +1,8 @@
 import React from "react";
-import { Team } from "../lib/types";
 import { useDrag } from "react-dnd";
 
 const TeamItem = ({ team }) => {
-	const [{ isDragging }, drag] = useDrag(() => ({
+	const [, dragRef] = useDrag(() => ({
 		type: "team-item",
 		item: { ...team },
 		collect: monitor => ({
@@ -11,7 +10,7 @@ const TeamItem = ({ team }) => {
 		}),
 	}));
 	return (
-		<div ref={drag} className="team-wrapper">
+		<div ref={dragRef} className="team-wrapper">
 			<span>{team.area}</span>
 			<span>{team.team}</span>
 		</div>

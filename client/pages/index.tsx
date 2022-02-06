@@ -5,7 +5,6 @@ import DragDropBox from "./../components/DragDropBox";
 import TeamRankingsContainer from "../components/TeamRankingsContainer";
 import { Team } from "../lib/types";
 import { Context } from "../contexts/context";
-import { useDrop } from "react-dnd";
 
 // TODO: create component that shows playoff bracket
 const Home = () => {
@@ -100,37 +99,21 @@ const Home = () => {
 		Array(13).fill(null)
 	);
 
-	const [{ isOver }, drop] = useDrop(() => ({
-		accept: "team-item",
-		drop: (item: Team) => {
-			setTeamsDragDropBox(
-				teamsDragDropBox.filter(team => team.seed !== item.seed)
-			);
-			teamRankings[0] = item;
-		},
-		collect: monitor => ({
-			isOver: !!monitor.isOver(),
-		}),
-	}));
 	const [componentsMounted, setComponentsMounted] = useState(false);
 	useEffect(() => setComponentsMounted(true), []);
+	const contextValue = {
+		teamsDragDropBox,
+		setTeamsDragDropBox,
+		teamRankings,
+		setTeamRankings,
+	};
 	return (
 		<>
 			<main className={styles.main}>
 				{componentsMounted ? (
-					<Context.Provider
-						value={{
-							teamsDragDropBox,
-							setTeamsDragDropBox,
-							teamRankings,
-							setTeamRankings,
-						}}
-					>
+					<Context.Provider value={contextValue}>
 						<DragDropBox teams={teamsDragDropBox} />
-						<TeamRankingsContainer
-							dropRef={drop}
-							teams={teamRankings}
-						/>
+						<TeamRankingsContainer teams={teamRankings} />
 					</Context.Provider>
 				) : (
 					<Loading show />
